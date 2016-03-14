@@ -27,19 +27,17 @@ public class PageLancement {
 	final static JFrame lancement = new JFrame();
 	static Menu menu = new Menu();
 	//static URL url = getResource("src/main/java/Plateau/ETERNITY.gif");
-	static JLabel eternity = new JLabel(new ImageIcon("src/main/java/Plateau/ETERNITY.png"));
+	static JLabel eternity = new JLabel(new ImageIcon("src/jeu/tetris.jpg"));
 	static JPanel titre = new JPanel(new BorderLayout());
 	static JPanel mainPan = new JPanel(new BorderLayout());
 	static JPanel pan = new JPanel(new BorderLayout());
 	static JPanel pan1 = new JPanel(new BorderLayout());
 	static ImageIcon ico = new ImageIcon(new ImageIcon("src/main/java/Plateau/img00.jpg").getImage().getScaledInstance(280,280,Image.SCALE_DEFAULT));
-	static JLabel img00 = new JLabel(ico);
-	static JLabel img01 = new JLabel( new ImageIcon( "src/main/java/Plateau/img01.jpg"));
-	static JLabel img02 = new JLabel( new ImageIcon( "src/main/java/Plateau/img02.jpg"));
 	final static JTextField name = new JTextField("Entrez votre nom");
 	static JButton jouer = new JButton("Jouer");
-	static JButton commande = new JButton("RÃ¨gles / Commandes");
-	static JButton valider = new JButton("C'est parti!");
+	static JButton commande = new JButton("Règles / Commandes");
+	static JButton solo = new JButton("solo");
+	static JButton mutli = new JButton("mutli");
 	static String nom;
 	
 	/**
@@ -62,9 +60,9 @@ public class PageLancement {
 		});
 		
 		titre.add(eternity);
-		pan.add(img00, "North");
 		pan1.add(name, "North");
-		pan1.add(valider, "Center");
+		pan1.add(solo, "Center");
+		pan1.add(mutli, "West");
 		pan1.add(commande,"South");
 		mainPan.add(titre,"North");
 		mainPan.add(pan,"Center");
@@ -92,13 +90,21 @@ public class PageLancement {
 			}
 		});
 		
-		valider.addActionListener(new ActionListener(){
+		solo.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				nom = name.getText();
 				//String[] args = null;
 				//ModeDeJeu mdj = new ModeDeJeu(nom, lancement);
 				mainPan.setVisible(false);
-				
+			}
+		});
+		
+		mutli.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				nom = name.getText();
+				//String[] args = null;
+				//ModeDeJeu mdj = new ModeDeJeu(nom, lancement);
+				mainPan.setVisible(false);
 			}
 		});
 		
