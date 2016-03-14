@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;Tetrie_INF4043&apos; to &apos;Tetris_INF4043&apos;&#x0D;&#x0A;- Original element: &apos;Tetrie_INF4043&apos;&#x0D;&#x0A;- Renamed element: &apos;Tetrie_INF4043&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename Java project &apos;Tetrie_INF4043&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=Tetrie_INF4043" name="Tetris_INF4043" references="true" stamp="1457903652327" version="1.0"/>
+</session>
