@@ -1,34 +1,16 @@
 package jeu;
 
 import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 
-import DAO.CsvRW;
-import Pieces.Pieces;
-import Plateau.Menu;
-import users.Joueur;
 
-public class Plateau
-{
-	
-	Pieces [] piecesTab;
-//	static Zone zone = new Zone();
+public class Plateau {
 	
 	int nbCaseTotalTab=100;
 	
-	
 
 	public Plateau(String link) {
-		
 		System.out.println("Création PLateau");
-		
-		CsvRW ReaderCsv=new CsvRW(link);
-		
-		
-		Pieces[] tab = ReaderCsv.findAllPieces();
-		
-		this.piecesTab = tab;
 	}
 
 	private static void ConfigurationFenetre() {
@@ -66,3 +48,4 @@ public class Plateau
 		ConfigurationFenetre();
 	}
 }
+
