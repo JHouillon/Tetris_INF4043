@@ -53,7 +53,7 @@ public class PageLancement {
 	public static void Lancement(){
 		
 		
-		lancement.setTitle("Eternity");
+		lancement.setTitle("Tetris");
 		lancement.setSize(720,720);
 		lancement.setResizable(false);
 	
