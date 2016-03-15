@@ -9,10 +9,7 @@ import javax.swing.JMenuItem;
 
 public class Menu extends JMenuBar{
 
-	 /**
-	 * 
-	 */
-	private static final long serialVersionUID = 2724053099460074269L;
+	private static final long serialVersionUID = 1L;
 
 	public Menu() {
 

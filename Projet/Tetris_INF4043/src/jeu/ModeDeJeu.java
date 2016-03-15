@@ -3,7 +3,6 @@ package jeu;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import tetris.Tetris;
 
 public class ModeDeJeu extends JFrame {
 
@@ -27,12 +26,4 @@ public class ModeDeJeu extends JFrame {
    public JLabel getStatusBar() {
        return statusbar;
    }
-
-    public static void main(String[] args) {
-
-        Tetris game = new Tetris();
-        game.setLocationRelativeTo(null);
-        game.setVisible(true);
-
-    } 
 }

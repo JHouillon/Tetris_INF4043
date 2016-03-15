@@ -16,7 +16,6 @@ public class PageLancement
 	final static JFrame lancement = new JFrame();
 	static Menu menu = new Menu();
 	static JPanel pan = new JPanel();
-	static JPanel pan1 = new JPanel();
 	final static JTextField name = new JTextField("Entrez votre nom");
 	static JButton jouer = new JButton("Jouer");
 	static JButton commande = new JButton("Régles / Commandes");
@@ -44,7 +43,8 @@ public class PageLancement
 		lancement.setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		Lancement();
 		
 		valider.addActionListener(new ActionListener()
@@ -52,10 +52,11 @@ public class PageLancement
 			public void actionPerformed(ActionEvent arg0)
 			{
 				nom = name.getText();
-				new ModeDeJeu();
+				ModeDeJeu jeu = new ModeDeJeu();
+		        jeu.setLocationRelativeTo(null);
+		        jeu.setVisible(true);
 				pan.setVisible(false);
 			}
 		});
 	}
-
 }
