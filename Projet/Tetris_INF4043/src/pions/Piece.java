@@ -10,9 +10,8 @@ public class Piece
 	};
 
 	private Forme f;
-	private int coords[][];
+	protected int coords[][];
 	private int[][][] coordsTable;
-	public Mouvement mv = new Mouvement();
 
 	public Piece()
 	{

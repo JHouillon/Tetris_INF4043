@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import pions.Mouvement;
 import pions.Piece;
 import pions.Piece.Forme;
 
@@ -29,6 +30,7 @@ public class Plateau extends JPanel implements ActionListener {
 	int curY = 0;
 	JLabel statusbar;
 	Piece curPiece;
+	Mouvement mv;
 	Forme[] f;
 
 	public Plateau(ModeDeJeu parent) {
@@ -109,8 +111,8 @@ public class Plateau extends JPanel implements ActionListener {
 
 		if (curPiece.getForme() != Forme.Rien) {
 			for (int i = 0; i < 4; ++i) {
-				int x = curX + curPiece.mv.x(i);
-				int y = curY - curPiece.mv.y(i);
+				int x = curX + mv.x(i);
+				int y = curY - mv.y(i);
 				drawSquare(g, 0 + x * squareWidth(), boardTop + (BoardHeight - y - 1) * squareHeight(),
 						curPiece.getForme());
 			}
@@ -139,8 +141,8 @@ public class Plateau extends JPanel implements ActionListener {
 
 	private void pieceDropped() {
 		for (int i = 0; i < 4; ++i) {
-			int x = curX + curPiece.mv.x(i);
-			int y = curY - curPiece.mv.y(i);
+			int x = curX + mv.x(i);
+			int y = curY - mv.y(i);
 			f[(y * BoardWidth) + x] = curPiece.getForme();
 		}
 
@@ -153,20 +155,21 @@ public class Plateau extends JPanel implements ActionListener {
 	private void newPiece() {
 		curPiece.setRandomForme();
 		curX = BoardWidth / 2 + 1;
-		curY = BoardHeight - 1 + curPiece.mv.minY();
+		curY = BoardHeight - 1 + mv.minY();
 
 		if (!tryMove(curPiece, curX, curY)) {
 			curPiece.setForme(Forme.Rien);
 			timer.stop();
 			isStarted = false;
-			statusbar.setText("game over");
+			statusbar.setText("Perdu");
 		}
 	}
 
 	private boolean tryMove(Piece newPiece, int newX, int newY) {
+		Mouvement  m = new Mouvement();
 		for (int i = 0; i < 4; ++i) {
-			int x = newX + newPiece.mv.x(i);
-			int y = newY - newPiece.mv.y(i);
+			int x = newX + m.x(i);
+			int y = newY - m.y(i);
 			if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight)
 				return false;
 			if (shapeAt(x, y) != Forme.Rien)
@@ -255,10 +258,10 @@ public class Plateau extends JPanel implements ActionListener {
 				tryMove(curPiece, curX + 1, curY);
 				break;
 			case KeyEvent.VK_DOWN:
-				tryMove(curPiece.mv.rotateRight(), curX, curY);
+				tryMove(mv.rotateRight(), curX, curY);
 				break;
 			case KeyEvent.VK_UP:
-				tryMove(curPiece.mv.rotateLeft(), curX, curY);
+				tryMove(mv.rotateLeft(), curX, curY);
 				break;
 			case KeyEvent.VK_SPACE:
 				dropDown();

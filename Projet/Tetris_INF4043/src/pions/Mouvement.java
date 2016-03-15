@@ -1,12 +1,7 @@
 package pions;
 
-import pions.Piece.Forme;
-
-public class Mouvement
+public class Mouvement extends Piece
 {
-	private Piece p = new Piece();
-	private int coords[][];
-
 	public int x(int index)
 	{
 		return coords[index][0];
@@ -39,11 +34,11 @@ public class Mouvement
 	
 	public Piece rotateLeft()
 	{
-		if (p.getForme() == Forme.O)
-			return p;
+		if (this.getForme() == Forme.O)
+			return this;
 
 		Piece result = new Piece();
-		result.setForme(p.getForme());
+		result.setForme(this.getForme());
 
 		for (int i = 0; i < 4; ++i)
 		{
@@ -55,11 +50,11 @@ public class Mouvement
 
 	public Piece rotateRight()
 	{
-		if (p.getForme() == Forme.O)
-			return p;
+		if (this.getForme() == Forme.O)
+			return this;
 
 		Piece result = new Piece();
-		result.setForme(p.getForme());
+		result.setForme(this.getForme());
 
 		for (int i = 0; i < 4; ++i)
 		{
