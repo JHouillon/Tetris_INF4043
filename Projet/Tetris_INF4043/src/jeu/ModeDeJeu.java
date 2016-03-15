@@ -34,6 +34,7 @@ public class ModeDeJeu extends JFrame {
         p.start();
 
         setSize(200, 400);
+        setResizable(false);
         setTitle("Tetris");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
