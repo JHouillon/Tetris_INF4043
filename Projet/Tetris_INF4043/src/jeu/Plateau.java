@@ -29,14 +29,15 @@ public class Plateau extends JPanel implements ActionListener {
 	int curX = 0;
 	int curY = 0;
 	JLabel statusbar;
-	Piece curPiece;
+	Mouvement curPiece;
+	Piece p;
 	Forme[] f;
 
 	public Plateau(ModeDeJeu parent) {
 
 		setFocusable(true);
-		curPiece = new Piece();
-		curPiece = new Mouvement();
+		//curPiece = new Piece();
+		curPiece = new Mouvement(p);
 		timer = new Timer(400, this);
 		timer.start();
 
@@ -141,8 +142,8 @@ public class Plateau extends JPanel implements ActionListener {
 
 	private void pieceDropped() {
 		for (int i = 0; i < 4; ++i) {
-			int x = curX + ((Mouvement)curPiece).x(i);
-			int y = curY - ((Mouvement)curPiece).y(i);
+			int x = curX + curPiece.x(i);
+			int y = curY - curPiece.y(i);
 			f[(y * BoardWidth) + x] = curPiece.getForme();
 		}
 
@@ -156,7 +157,7 @@ public class Plateau extends JPanel implements ActionListener {
 		curPiece.setRandomForme();
 		System.out.println(curPiece.getForme());
 		curX = BoardWidth / 2 + 1;
-		curY = BoardHeight - 1 + ((Mouvement)curPiece).minY();
+		curY = BoardHeight - 1 + curPiece.minY();
 
 		if (!tryMove(curPiece, curX, curY)) {
 			curPiece.setForme(Forme.Rien);
@@ -166,18 +167,19 @@ public class Plateau extends JPanel implements ActionListener {
 		}
 	}
 
-	private boolean tryMove(Piece newPiece, int newX, int newY) {
-		newPiece = new Mouvement();
+	private boolean tryMove(Mouvement newM, int newX, int newY) {
+		newM = new Mouvement(p);
 		for (int i = 0; i < 4; ++i) {
-			int x = newX + ((Mouvement)newPiece).x(i);
-			int y = newY - ((Mouvement)newPiece).y(i);
+			int x = newX + newM.x(i);
+			int y = newY - newM.y(i);
 			if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight)
 				return false;
 			if (shapeAt(x, y) != Forme.Rien)
 				return false;
 		}
 
-		curPiece = newPiece;
+		//curPiece = newPiece;
+		curPiece = new Mouvement(p);
 		curX = newX;
 		curY = newY;
 		repaint();
@@ -259,10 +261,10 @@ public class Plateau extends JPanel implements ActionListener {
 				tryMove(curPiece, curX + 1, curY);
 				break;
 			case KeyEvent.VK_DOWN:
-				tryMove(((Mouvement)curPiece).rotateRight(), curX, curY);
+				tryMove((Mouvement)curPiece.rotateRight(), curX, curY);
 				break;
 			case KeyEvent.VK_UP:
-				tryMove(((Mouvement)curPiece).rotateLeft(), curX, curY);
+				tryMove((Mouvement)curPiece.rotateLeft(), curX, curY);
 				break;
 			case KeyEvent.VK_SPACE:
 				dropDown();

@@ -2,6 +2,12 @@ package pions;
 
 public class Mouvement extends Piece
 {
+	
+	public Mouvement(Piece p)
+	{
+		p = new Piece();
+	}
+	
 	public int x(int index)
 	{
 		return coords[index][0];
