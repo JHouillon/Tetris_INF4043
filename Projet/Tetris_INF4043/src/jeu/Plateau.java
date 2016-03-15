@@ -1,4 +1,5 @@
 package jeu;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import pions.Piece;
 import pions.Forme.Formes;
+
 public class Plateau extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	final int BoardWidth = 10;
@@ -25,6 +27,7 @@ public class Plateau extends JPanel implements ActionListener {
 	JLabel statusbar;
 	Piece curPiece;
 	Formes[] f;
+
 	public Plateau(ModeDeJeu parent) {
 		setFocusable(true);
 		curPiece = new Piece();
@@ -35,6 +38,7 @@ public class Plateau extends JPanel implements ActionListener {
 		addKeyListener(new TAdapter());
 		clearBoard();
 	}
+
 	public void actionPerformed(ActionEvent e) {
 		if (isFallingFinished) {
 			isFallingFinished = false;
@@ -43,15 +47,19 @@ public class Plateau extends JPanel implements ActionListener {
 			oneLineDown();
 		}
 	}
+
 	int squareWidth() {
 		return (int) getSize().getWidth() / BoardWidth;
 	}
+
 	int squareHeight() {
 		return (int) getSize().getHeight() / BoardHeight;
 	}
+
 	Formes shapeAt(int x, int y) {
 		return f[(y * BoardWidth) + x];
 	}
+
 	public void start() {
 		if (isPaused)
 			return;
@@ -62,6 +70,7 @@ public class Plateau extends JPanel implements ActionListener {
 		newPiece();
 		timer.start();
 	}
+
 	private void pause() {
 		if (!isStarted)
 			return;
@@ -75,6 +84,7 @@ public class Plateau extends JPanel implements ActionListener {
 		}
 		repaint();
 	}
+
 	public void paint(Graphics g) {
 		super.paint(g);
 		Dimension size = getSize();
@@ -95,6 +105,7 @@ public class Plateau extends JPanel implements ActionListener {
 			}
 		}
 	}
+
 	private void dropDown() {
 		int newY = curY;
 		while (newY > 0) {
@@ -104,14 +115,17 @@ public class Plateau extends JPanel implements ActionListener {
 		}
 		pieceDropped();
 	}
+
 	private void oneLineDown() {
 		if (!tryMove(curPiece, curX, curY - 1))
 			pieceDropped();
 	}
+
 	private void clearBoard() {
 		for (int i = 0; i < BoardHeight * BoardWidth; ++i)
 			f[i] = Formes.Rien;
 	}
+
 	private void pieceDropped() {
 		for (int i = 0; i < 4; ++i) {
 			int x = curX + curPiece.x(i);
@@ -122,6 +136,7 @@ public class Plateau extends JPanel implements ActionListener {
 		if (!isFallingFinished)
 			newPiece();
 	}
+
 	private void newPiece() {
 		curPiece.setRandomForme();
 		System.out.println(curPiece.getForme());
@@ -134,6 +149,7 @@ public class Plateau extends JPanel implements ActionListener {
 			statusbar.setText("Perdu");
 		}
 	}
+
 	private boolean tryMove(Piece newPiece, int newX, int newY) {
 		for (int i = 0; i < 4; ++i) {
 			int x = newX + newPiece.x(i);
@@ -149,6 +165,7 @@ public class Plateau extends JPanel implements ActionListener {
 		repaint();
 		return true;
 	}
+
 	private void removeFullLines() {
 		int numFullLines = 0;
 		for (int i = BoardHeight - 1; i >= 0; --i) {
@@ -175,6 +192,7 @@ public class Plateau extends JPanel implements ActionListener {
 			repaint();
 		}
 	}
+
 	private void drawSquare(Graphics g, int x, int y, Formes f) {
 		Color colors[] = { new Color(0, 0, 0), new Color(204, 102, 102), new Color(102, 204, 102),
 				new Color(102, 102, 204), new Color(204, 204, 102), new Color(204, 102, 204), new Color(102, 204, 204),
@@ -189,6 +207,7 @@ public class Plateau extends JPanel implements ActionListener {
 		g.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
 		g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
 	}
+
 	class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			if (!isStarted || curPiece.getForme() == Formes.Rien) {
