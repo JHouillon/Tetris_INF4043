@@ -137,11 +137,9 @@ public class Plateau extends JPanel implements ActionListener {
 			newPiece();
 	}
 	
-	
-
 	private void newPiece() {
 		curPiece.setRandomForme();
-		System.out.println(curPiece.getForme());
+		//System.out.println(curPiece.getForme());
 		curX = BoardWidth / 2 + 1;
 		curY = BoardHeight - 1 + curPiece.minY();
 		if (!tryMove(curPiece, curX, curY)) {
