@@ -38,7 +38,7 @@ public class PageLancement {
 		
 		name.addFocusListener(new FocusAdapter() {
 		    public void focusGained(FocusEvent e) {
-		    	name.setText(" ");
+		    	name.setText("");
 		    }
 		});
 		
@@ -50,7 +50,7 @@ public class PageLancement {
 		lancement.add(pan1,BorderLayout.WEST);
 		lancement.add(pan2,BorderLayout.EAST);
 		lancement.add(pan3,BorderLayout.SOUTH);
-		lancement.add(tetris);
+		lancement.add(tetris,BorderLayout.CENTER);
 		lancement.setVisible(true);
 	}
 	
