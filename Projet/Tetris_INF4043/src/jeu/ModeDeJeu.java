@@ -15,15 +15,17 @@ public class ModeDeJeu extends JFrame {
 	JPanel menu = new JPanel(new BorderLayout());
 	JPanel score = new JPanel(new BorderLayout());
 	JLabel statusbar;
+	JLabel statusbarT;
 	JLabel nom;
 	String name;
 
 
     public ModeDeJeu() {
 
+        statusbar = new JLabel("Score: 0");
+        statusbarT = new JLabel("Temps : 0");
         Plateau p = new Plateau(this);
         nom = new JLabel(PageLancement.getName());
-        statusbar = new JLabel("Score: 0");
         this.setLayout(new BorderLayout());
 
         menu.setPreferredSize(new Dimension(150,400));
@@ -34,6 +36,7 @@ public class ModeDeJeu extends JFrame {
         menu.add(nom);
         menu.setBackground(Color.GRAY);
         score.add(statusbar);
+        score.add(statusbarT, BorderLayout.SOUTH);
         score.setBackground(Color.GRAY);
   
         add(menu,BorderLayout.WEST);
@@ -47,8 +50,12 @@ public class ModeDeJeu extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
    }
 
-   public JLabel getStatusBar() {
-       return statusbar;
-   }
+    public JLabel getStatusBar() {
+        return statusbar;
+    }
+    
+    public JLabel getStatusBarT() {
+        return statusbarT;
+    }
 }
 

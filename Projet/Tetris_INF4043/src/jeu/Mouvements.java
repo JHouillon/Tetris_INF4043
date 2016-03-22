@@ -29,19 +29,30 @@ public class Mouvements extends JPanel implements ActionListener
 	int curY = 0;
 	Piece curPiece;
 	Formes[] f;
-	String score = null;
+	int score;
 	Score sc = new Score(PageLancement.getName());
 	JLabel statusBar;
+	JLabel statusBarT;
+	int temps=0;
 	
 	public Mouvements()
 	{
-		timer = new Timer(400, this);
+		setFocusable(true);
+		curPiece = new Piece();
+		f = new Formes[BoardWidth * BoardHeight];
 		addKeyListener(new TAdapter());
-		timer.start();
+		
+		timer = new Timer(1000, this);
+       	timer.start(); 
+		Timer.setLogTimers(true);
+		clearBoard();
 	}
 
 	public void actionPerformed(ActionEvent e)
 	{
+		temps++;
+		statusBarT.setText("Temps : " + temps);
+		
 		if (isFallingFinished)
 		{
 			isFallingFinished = false;
@@ -105,7 +116,7 @@ public class Mouvements extends JPanel implements ActionListener
 			curPiece.setForme(Formes.Rien);
 			timer.stop();
 			isStarted = false;
-			JOptionPane.showMessageDialog(null, "Vous avez perdu !" + timer);
+			JOptionPane.showMessageDialog(null, "Vous avez perdu !");
 		}
 	}
 	
@@ -154,8 +165,8 @@ public class Mouvements extends JPanel implements ActionListener
 			}
 			if (lineIsFull)
 			{
-				score = sc.ligneRemplie(10);
-				statusBar.setText(score);
+				score = sc.ligneRemplie(temps);
+				statusBar.setText("Score : " + score);
 				++numFullLines;
 				for (int k = i; k < BoardHeight - 1; ++k)
 				{

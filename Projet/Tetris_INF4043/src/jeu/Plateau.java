@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import pions.Piece;
 import pions.Forme.Formes;
 
 public class Plateau extends Mouvements
@@ -13,11 +12,8 @@ public class Plateau extends Mouvements
 
 	public Plateau(ModeDeJeu parent)
 	{
-		setFocusable(true);
-		curPiece = new Piece();
-		f = new Formes[BoardWidth * BoardHeight];
-		clearBoard();
 		statusBar = parent.getStatusBar();
+		statusBarT = parent.getStatusBarT();
 	}
 
 	public void start()
