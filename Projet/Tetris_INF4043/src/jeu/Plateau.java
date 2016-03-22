@@ -136,6 +136,8 @@ public class Plateau extends JPanel implements ActionListener {
 		if (!isFallingFinished)
 			newPiece();
 	}
+	
+	
 
 	private void newPiece() {
 		curPiece.setRandomForme();
