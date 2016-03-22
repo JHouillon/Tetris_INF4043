@@ -17,6 +17,7 @@ public class Plateau extends Mouvements
 		curPiece = new Piece();
 		f = new Formes[BoardWidth * BoardHeight];
 		clearBoard();
+		statusBar = parent.getStatusBar();
 	}
 
 	public void start()

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -28,7 +29,9 @@ public class Mouvements extends JPanel implements ActionListener
 	int curY = 0;
 	Piece curPiece;
 	Formes[] f;
+	String score = null;
 	Score sc = new Score(PageLancement.getName());
+	JLabel statusBar;
 	
 	public Mouvements()
 	{
@@ -151,7 +154,8 @@ public class Mouvements extends JPanel implements ActionListener
 			}
 			if (lineIsFull)
 			{
-				//sc.ligneRemplie(timer.);
+				score = sc.ligneRemplie(10);
+				statusBar.setText(score);
 				++numFullLines;
 				for (int k = i; k < BoardHeight - 1; ++k)
 				{
@@ -163,7 +167,6 @@ public class Mouvements extends JPanel implements ActionListener
 		if (numFullLines > 0)
 		{
 			numLinesRemoved += numFullLines;
-			//statusbar.setText(String.valueOf(numLinesRemoved));
 			isFallingFinished = true;
 			curPiece.setForme(Formes.Rien);
 			repaint();

@@ -2,16 +2,18 @@ package users;
 
 public class Score extends Joueur
 {
-	private int valeur;
+	private String valeur;
 	
 	public Score(String nom)
 	{
 		super(nom);
+		this.valeur = null;
 	}
 	
-	public int ligneRemplie(int temps)
+	public String ligneRemplie(int temps)
 	{
-		this.valeur += temps/10;
+		int x = 30;
+		this.valeur = String.valueOf(x);
 		return valeur;
 	}
 }
