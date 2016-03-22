@@ -2,23 +2,12 @@ package users;
 
 public class Joueur
 {
-	private int id;
+	protected String nom;
+	protected int valeur;
+	protected int temps;
 	
-	Score sc;
-
-	public int getId()
+	public Joueur(String nom)
 	{
-		return id;
-	}
-
-	public void setId(int id)
-	{
-		this.id = id;
-	}
-
-	public Joueur(int id)
-	{
-		super();
-		this.id = id;
+		this.nom = nom;
 	}
 }

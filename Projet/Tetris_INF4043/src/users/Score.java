@@ -1,31 +1,17 @@
 package users;
 
-public class Score
+public class Score extends Joueur
 {
 	private int valeur;
-	private int temps;
 	
-	public Score(int valeur, int temps)
+	public Score(String nom)
 	{
-		super();
-		this.valeur = valeur;
-		this.temps = temps;
+		super(nom);
 	}
 	
-	public int getValeur()
+	public int ligneRemplie(int temps)
 	{
+		this.valeur += temps/10;
 		return valeur;
-	}
-	public void setValeur(int valeur)
-	{
-		this.valeur = valeur;
-	}
-	public int getTemps()
-	{
-		return temps;
-	}
-	public void setTemps(int temps)
-	{
-		this.temps = temps;
 	}
 }

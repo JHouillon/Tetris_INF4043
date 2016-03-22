@@ -1,6 +1,7 @@
 package jeu;
 
 import pions.Piece;
+import users.Score;
 import pions.Forme.Formes;
 
 import java.awt.event.ActionEvent;
@@ -8,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -25,10 +26,9 @@ public class Mouvements extends JPanel implements ActionListener
 	int numLinesRemoved = 0;
 	int curX = 0;
 	int curY = 0;
-	JLabel statusbar;
 	Piece curPiece;
 	Formes[] f;
-
+	Score sc = new Score(PageLancement.getName());
 	
 	public Mouvements()
 	{
@@ -46,7 +46,7 @@ public class Mouvements extends JPanel implements ActionListener
 		}
 		else
 		{
-			oneLineDown(curPiece, curX, curY);
+			oneLineDown();
 		}
 	}
 
@@ -57,10 +57,8 @@ public class Mouvements extends JPanel implements ActionListener
 		isPaused = !isPaused;
 		if (isPaused) {
 			timer.stop();
-			statusbar.setText("paused");
 		} else {
 			timer.start();
-			statusbar.setText(String.valueOf(numLinesRemoved));
 		}
 		repaint();
 	}
@@ -104,11 +102,11 @@ public class Mouvements extends JPanel implements ActionListener
 			curPiece.setForme(Formes.Rien);
 			timer.stop();
 			isStarted = false;
-			statusbar.setText("Perdu");
+			JOptionPane.showMessageDialog(null, "Vous avez perdu !" + timer);
 		}
 	}
 	
-	private void dropDown(Piece curPiece, int curX, int curY)
+	private void dropDown()
 	{
 		int newY = curY;
 		while (newY > 0) {
@@ -119,7 +117,7 @@ public class Mouvements extends JPanel implements ActionListener
 		pieceDropped(curPiece, curX, curY);
 	}
 
-	private void oneLineDown(Piece curPiece, int curX, int curY)
+	private void oneLineDown()
 	{
 		if (!tryMove(curPiece, curX, curY - 1))
 			pieceDropped(curPiece, curX, curY);
@@ -153,6 +151,7 @@ public class Mouvements extends JPanel implements ActionListener
 			}
 			if (lineIsFull)
 			{
+				//sc.ligneRemplie(timer.);
 				++numFullLines;
 				for (int k = i; k < BoardHeight - 1; ++k)
 				{
@@ -164,7 +163,7 @@ public class Mouvements extends JPanel implements ActionListener
 		if (numFullLines > 0)
 		{
 			numLinesRemoved += numFullLines;
-			statusbar.setText(String.valueOf(numLinesRemoved));
+			//statusbar.setText(String.valueOf(numLinesRemoved));
 			isFallingFinished = true;
 			curPiece.setForme(Formes.Rien);
 			repaint();
@@ -202,13 +201,13 @@ public class Mouvements extends JPanel implements ActionListener
 				tryMove(curPiece.rotateLeft(), curX, curY);
 				break;
 			case KeyEvent.VK_SPACE:
-				dropDown(curPiece, curX, curY);
+				dropDown();
 				break;
 			case 'd':
-				oneLineDown(curPiece, curX, curY);
+				oneLineDown();
 				break;
 			case 'D':
-				oneLineDown(curPiece, curX, curY);
+				oneLineDown();
 				break;
 			}
 		}
