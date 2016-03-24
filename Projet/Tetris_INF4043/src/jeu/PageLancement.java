@@ -31,9 +31,9 @@ public class PageLancement {
 	static JButton commande = new JButton("Régles / Commandes");
 	static JButton valider = new JButton("Solo");
 	static JButton multi = new JButton("Multi");
+	static JButton score = new JButton("Afficher les scores");
 	static String nom;
 	static JPanel panel = new JPanel(new BorderLayout());
-	static JLabel score = new JLabel("High Score: 0");
 	
 	public static void Lancement() throws IOException{
 		
@@ -70,7 +70,7 @@ public class PageLancement {
 		panel.getComponent(0).setBounds(200,5,100,30);
 		panel.getComponent(1).setBounds(20,270,58,30);
 		panel.getComponent(2).setBounds(420,270,58,30);
-		panel.getComponent(3).setBounds(200,375,100,100);
+		panel.getComponent(3).setBounds(200,365,120,30);
 		lancement.pack();
 		lancement.setVisible(true);
 	}
@@ -119,6 +119,28 @@ public class PageLancement {
 				}
 				else
 					JOptionPane.showMessageDialog(null, "ALERT : Vous devez entrer un nom pour jouer !!!");
+			}
+			
+		});
+		
+		multi.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+						
+			}
+			
+		});
+		
+		score.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Score score = new Score();		
+				score.setLocationRelativeTo(null);
+				score.setVisible(true);
 			}
 			
 		});
