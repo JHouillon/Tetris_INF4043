@@ -43,8 +43,7 @@ public class Mouvements extends JPanel implements ActionListener
 		addKeyListener(new TAdapter());
 		
 		timer = new Timer(1000, this);
-       	timer.start(); 
-		Timer.setLogTimers(true);
+       	timer.start();
 		clearBoard();
 	}
 
