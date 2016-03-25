@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -138,11 +139,24 @@ public class PageLancement {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				Score score = new Score();		
-				score.setLocationRelativeTo(null);
-				score.setVisible(true);
+				String msg = "<html><b>Nique bien ta mère et mange bien mes couilles enculer</b>";
+				 JOptionPane optionPane = new NarrowOptionPane();
+				 optionPane.setMessage(msg);
+				 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
+				 JDialog dialog = optionPane.createDialog(null, "High Score");
+				 dialog.setVisible(true);
 			}
 			
 		});
 	}
 }
+
+class NarrowOptionPane extends JOptionPane {
+
+	  NarrowOptionPane() {
+	  }
+
+	  public int getMaxCharactersPerLineCount() {
+	    return 100;
+	  }
+	}
