@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import users.Score;
+
 public class PageLancement {
 	final static JFrame lancement = new JFrame();
 	static Menu menu = new Menu();
@@ -35,6 +37,7 @@ public class PageLancement {
 	static JButton score = new JButton("Afficher les scores");
 	static String nom;
 	static JPanel panel = new JPanel(new BorderLayout());
+	static Score sc = new Score(nom);
 	
 	public static void Lancement() throws IOException{
 		
@@ -119,7 +122,7 @@ public class PageLancement {
 					pan.setVisible(false);
 				}
 				else
-					JOptionPane.showMessageDialog(null, "ALERT : Vous devez entrer un nom pour jouer !!!");
+					JOptionPane.showMessageDialog(null, "ALERTE : Vous devez entrer un nom pour jouer !!!");
 			}
 			
 		});
@@ -139,7 +142,7 @@ public class PageLancement {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				String msg = "<html><b>Nique bien ta mère et mange bien mes couilles enculer</b>";
+				String msg = sc.lectureScore();
 				 JOptionPane optionPane = new NarrowOptionPane();
 				 optionPane.setMessage(msg);
 				 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);

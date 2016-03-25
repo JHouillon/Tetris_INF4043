@@ -115,6 +115,7 @@ public class Mouvements extends JPanel implements ActionListener
 			curPiece.setForme(Formes.Rien);
 			timer.stop();
 			isStarted = false;
+			sc.ajoutScore(score);
 			JOptionPane.showMessageDialog(null, "Vous avez perdu !");
 		}
 	}
