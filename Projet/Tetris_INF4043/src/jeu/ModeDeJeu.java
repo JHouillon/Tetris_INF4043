@@ -2,6 +2,7 @@ package jeu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -11,14 +12,13 @@ import javax.swing.JPanel;
 public class ModeDeJeu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	JPanel jeu = new JPanel(new BorderLayout());
-	JPanel menu = new JPanel(new BorderLayout());
-	JPanel score = new JPanel(new BorderLayout());
-	JLabel statusbar;
-	JLabel statusbarT;
-	JLabel nom;
-	String name;
-
+	static JPanel jeu = new JPanel(new BorderLayout());
+	static JPanel menu = new JPanel(new BorderLayout());
+	static JPanel score = new JPanel(new BorderLayout());
+	static JLabel statusbar;
+	static JLabel statusbarT;
+	static JLabel nom;
+	static String name;
 
     public ModeDeJeu() {
 
@@ -56,6 +56,17 @@ public class ModeDeJeu extends JFrame {
     
     public JLabel getStatusBarT() {
         return statusbarT;
+    }
+    
+    public void ResetFrame (){
+    	Container cp = ModeDeJeu.this.getContentPane();
+    	System.out.println(jeu);
+    	jeu.removeAll();
+    	System.out.println(jeu);
+    	JLabel label = new JLabel("bonsoir tous le monde");
+    	jeu.add(label /*, contrainte éventuelle liée au layout */);
+    	jeu.repaint();
+
     }
 }
 

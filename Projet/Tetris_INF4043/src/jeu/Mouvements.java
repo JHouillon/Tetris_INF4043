@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -116,7 +117,16 @@ public class Mouvements extends JPanel implements ActionListener
 			timer.stop();
 			isStarted = false;
 			sc.ajoutScore(score);
-			JOptionPane.showMessageDialog(null, "Vous avez perdu !");
+			int reply = JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez perdu !</h1><br><b>Voulez-vous recommencer ?</b>", "Game Over", JOptionPane.YES_NO_OPTION);
+	        if (reply == JOptionPane.YES_OPTION) {
+	        	ModeDeJeu jeu = new ModeDeJeu();
+	        	jeu.ResetFrame();
+	        }
+	        else {
+	        	PageLancement.lancement.setVisible(true);
+		        //System.exit(0);
+	        }
+			
 		}
 	}
 	
