@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -144,7 +143,7 @@ public class PageLancement {
 				// TODO Auto-generated method stub
 				String msg = sc.lectureScore();
 				 JOptionPane optionPane = new NarrowOptionPane();
-				 optionPane.setMessage(msg);
+				 optionPane.setMessage("Tableau des Scores (TOP 5) : \n\n" + msg);
 				 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
 				 JDialog dialog = optionPane.createDialog(null, "High Score");
 				 dialog.setVisible(true);
@@ -155,8 +154,9 @@ public class PageLancement {
 }
 
 class NarrowOptionPane extends JOptionPane {
+	private static final long serialVersionUID = 1L;
 
-	  NarrowOptionPane() {
+	NarrowOptionPane() {
 	  }
 
 	  public int getMaxCharactersPerLineCount() {

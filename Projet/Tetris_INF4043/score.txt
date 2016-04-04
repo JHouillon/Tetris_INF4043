@@ -1,5 +1,1 @@
-Tableau des Scores :
-
-Jeff : 150
-Jeff : 2000
-Pierre : 0
+Jefferson : 145
