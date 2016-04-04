@@ -120,6 +120,7 @@ public class PageLancement {
 					jeu.setLocationRelativeTo(null);
 					jeu.setVisible(true);
 					pan.setVisible(false);
+					lancement.setVisible(false);
 				}
 				else
 					JOptionPane.showMessageDialog(null, "ALERTE : Vous devez entrer un nom pour jouer !!!");
