@@ -119,7 +119,7 @@ public class Mouvements extends JPanel implements ActionListener
 			sc.ajoutScore(score);
 			int reply = JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez perdu !</h1><br><b>Voulez-vous recommencer ?</b>", "Game Over", JOptionPane.YES_NO_OPTION);
 	        if (reply == JOptionPane.YES_OPTION) {
-	        	ModeDeJeu jeu = new ModeDeJeu();
+	        	ModeDeJeu jeu = new ModeDeJeu(true);
 	        	jeu.ResetFrame();
 	        }
 	        else {

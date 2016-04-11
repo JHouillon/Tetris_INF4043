@@ -4,6 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,8 +26,9 @@ public class ModeDeJeu extends JFrame {
 	static JLabel statusbarT;
 	static JLabel nom;
 	static String name;
+	String[] joueurs = lectureMulti();
 
-    public ModeDeJeu() {
+    public ModeDeJeu(boolean multiJ) {
 
         statusbar = new JLabel("Score: 0");
         statusbarT = new JLabel("Temps : 0");
@@ -42,6 +50,21 @@ public class ModeDeJeu extends JFrame {
         add(menu,BorderLayout.WEST);
         add(jeu,BorderLayout.CENTER);
         add(score,BorderLayout.EAST);
+        
+        ajoutMulti();
+        
+        if(multiJ == true)
+        {
+        	while(joueurs[1] == null)
+            {
+            	joueurs = lectureMulti();
+            	for(int i =0;i<joueurs.length;++i)
+            	{
+            		System.out.println(joueurs[i]);
+            	}
+            }
+        }
+        
         p.start();
 
         setSize(500,450);
@@ -57,6 +80,55 @@ public class ModeDeJeu extends JFrame {
     public JLabel getStatusBarT() {
         return statusbarT;
     }
+    
+	public String[] lectureMulti()
+	{
+		String fichier = "multi.txt";
+		int nbLigne = 0;
+		String[] joueurs = new String[2];
+
+		try{
+			InputStream ips=new FileInputStream(fichier); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			
+			while ((ligne=br.readLine())!=null)
+			{
+				joueurs[nbLigne] = ligne;
+				nbLigne++;
+			}
+			br.close();
+		}		
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return joueurs;
+	}
+	
+	public void ajoutMulti()
+	{
+		String fichier ="multi.txt";
+		String[] old = lectureMulti();
+		
+		try
+		{
+			FileWriter fw = new FileWriter(fichier);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter fichierSortie = new PrintWriter(bw);
+			if(old[0] != null)
+				fichierSortie.print(old[0] + "\n" + PageLancement.getName()); 
+			else
+				fichierSortie.print(PageLancement.getName()); 
+			fichierSortie.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+	}
     
     public void ResetFrame (){
     	Container cp = ModeDeJeu.this.getContentPane();

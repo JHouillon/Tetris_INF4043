@@ -116,7 +116,7 @@ public class PageLancement {
 			{
 				nom = name.getText();
 				if(!nom.equals("")){
-					ModeDeJeu jeu = new ModeDeJeu();
+					ModeDeJeu jeu = new ModeDeJeu(multiJ);
 					jeu.setLocationRelativeTo(null);
 					jeu.setVisible(true);
 					pan.setVisible(false);
@@ -136,7 +136,7 @@ public class PageLancement {
 				nom = name.getText();
 				multiJ = true;
 				if(!nom.equals("")){
-					ModeDeJeu jeu = new ModeDeJeu();
+					ModeDeJeu jeu = new ModeDeJeu(multiJ);
 					jeu.setLocationRelativeTo(null);
 					jeu.setVisible(true);
 					pan.setVisible(false);
