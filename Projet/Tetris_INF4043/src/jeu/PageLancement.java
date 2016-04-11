@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -38,6 +37,7 @@ public class PageLancement {
 	static String nom;
 	static JPanel panel = new JPanel(new BorderLayout());
 	static Score sc = new Score(nom);
+	static boolean multiJ = false;
 	
 	public static void Lancement() throws IOException{
 		
@@ -126,14 +126,24 @@ public class PageLancement {
 					JOptionPane.showMessageDialog(null, "ALERTE : Vous devez entrer un nom pour jouer !!!");
 			}
 			
-		});
+		}); 	
 		
 		multi.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-						
+				nom = name.getText();
+				multiJ = true;
+				if(!nom.equals("")){
+					ModeDeJeu jeu = new ModeDeJeu();
+					jeu.setLocationRelativeTo(null);
+					jeu.setVisible(true);
+					pan.setVisible(false);
+					lancement.setVisible(false);
+				}
+				else
+					JOptionPane.showMessageDialog(null, "ALERTE : Vous devez entrer un nom pour jouer !!!");			
 			}
 			
 		});
@@ -145,7 +155,7 @@ public class PageLancement {
 				// TODO Auto-generated method stub
 				String msg = sc.lectureScore();
 				 JOptionPane optionPane = new NarrowOptionPane();
-				 optionPane.setMessage(msg);
+				 optionPane.setMessage("Tableau des Scores (TOP 5) : \n\n" + msg);
 				 optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
 				 JDialog dialog = optionPane.createDialog(null, "High Score");
 				 dialog.setVisible(true);
@@ -156,8 +166,9 @@ public class PageLancement {
 }
 
 class NarrowOptionPane extends JOptionPane {
+	private static final long serialVersionUID = 1L;
 
-	  NarrowOptionPane() {
+	NarrowOptionPane() {
 	  }
 
 	  public int getMaxCharactersPerLineCount() {
