@@ -41,7 +41,6 @@ public class Mouvements extends JPanel implements ActionListener
 	JLabel statusBar;
 	JLabel statusBarT;
 	int temps=0;
-	String[] joueursM = ModeDeJeu.getJoueurs();
 	boolean malus2 = false;
 	boolean malus3 = false;
 	int compteurMalus = 0;
@@ -63,6 +62,8 @@ public class Mouvements extends JPanel implements ActionListener
 		temps++;
 		statusBarT.setText("Temps : " + temps);
 		
+		testActionsAdversaire();
+		
 		if (isFallingFinished)
 		{
 			isFallingFinished = false;
@@ -72,8 +73,6 @@ public class Mouvements extends JPanel implements ActionListener
 		{
 			oneLineDown();
 		}
-		
-		testActionsAdversaire();
 	}
 
 	private void pause()
@@ -209,14 +208,17 @@ public class Mouvements extends JPanel implements ActionListener
 	
 	private void testScoreMalus(int score)
 	{
-		score = score%300;
+		if(score > 99)
+		{
+			score = score%300;
 
-		if(score > 99 && score < 200)
-			editerFichier("malus1");
-		else if (score > 199 && score < 300)
-			editerFichier("malus2");
-		else if (score < 100)
-			editerFichier("malus3");
+			if(score > 99 && score < 200)
+				editerFichier("malus1");
+			else if (score > 199 && score < 300)
+				editerFichier("malus2");
+			else if (score < 100)
+				editerFichier("malus3");
+		}
 	}
 	
 	private void editerFichier(String malus)
@@ -242,29 +244,21 @@ public class Mouvements extends JPanel implements ActionListener
 		String etat = lectureMalus();
 		String adversaire = nomAdversaire();
 
-		if(etat == adversaire + " : malus1")
+		if(etat.equals(adversaire + " : malus1"))
 		{
 			compteurMalus++;
-			
-            JOptionPane.showConfirmDialog(null, "Malus activé par votre adversaire : Vitesse de jeu accèlérée (x2)",
-            		"Malus", JOptionPane.CANCEL_OPTION);
 
-			timer = new Timer(500, this);
-			timer.start();
+			timer.setDelay(800);
 			
 			if(compteurMalus == 40)
 			{
-				timer = new Timer(1000, this);
-				timer.start();
+				timer.setDelay(1000);
 				compteurMalus = 0;
 			}
 		}
-		else if(etat == adversaire + " : malus2")
+		else if(etat.equals(adversaire + " : malus2"))
 		{
 			compteurMalus++;
-			
-            JOptionPane.showConfirmDialog(null, "Malus activé par votre adversaire : Touches droite et gauche inversées",
-            		"Malus", JOptionPane.CANCEL_OPTION);
             
 			malus2 = true;
 			
@@ -274,12 +268,9 @@ public class Mouvements extends JPanel implements ActionListener
 				compteurMalus = 0;
 			}
 		}
-		else if(etat == adversaire + " : malus3")
+		else if(etat.equals(adversaire + " : malus3"))
 		{
 			compteurMalus++;
-			
-            JOptionPane.showConfirmDialog(null, "Malus activé par votre adversaire : Seulement la forme Z",
-            		"Malus", JOptionPane.CANCEL_OPTION);
             
 			malus3 = true;
 			
@@ -320,14 +311,16 @@ public class Mouvements extends JPanel implements ActionListener
 	
 	private String nomAdversaire()
 	{
+		String[] joueursM = ModeDeJeu.getJoueurs();
+		
 		for(int i=0;i<joueursM.length;)
 		{
-			if(joueursM[0] != PageLancement.getName())
-				return joueursM[0];
-			else
+			if(joueursM[0].equals(PageLancement.getName()))
 				return joueursM[1];
+			else if(joueursM[1].equals(PageLancement.getName()))
+				return joueursM[0];
 		}
-		return null;
+		return "Toto";
 	}
 
 	class TAdapter extends KeyAdapter

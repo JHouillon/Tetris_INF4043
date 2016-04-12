@@ -1,6 +1,6 @@
-Jefferson : 145
-Marine : 1
-sdf : 0
-sdf : 0
-sdf : 0
-bb : 0
+Jeff : 3670
+aaa : 257
+Jeff : 229
+JH : 195
+Pier : 185
+zzz : 410
