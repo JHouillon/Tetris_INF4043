@@ -175,6 +175,7 @@ public class Mouvements extends JPanel implements ActionListener
 			{
 				score = sc.ligneRemplie(temps);
 				statusBar.setText("Score : " + score);
+				testScoreMalus(score);
 				++numFullLines;
 				for (int k = i; k < BoardHeight - 1; ++k)
 				{
@@ -190,6 +191,33 @@ public class Mouvements extends JPanel implements ActionListener
 			curPiece.setForme(Formes.Rien);
 			repaint();
 		}
+	}
+	
+	private void testScoreMalus(int score)
+	{
+		score = score%300;
+
+		if(score > 99 && score < 200)
+			malus1();
+		else if (score > 199 && score < 300)
+			malus2();
+		else if (score < 100)
+			malus3();
+	}
+	
+	private void malus1()
+	{
+		
+	}
+	
+	private void malus2()
+	{
+		
+	}
+	
+	private void malus3()
+	{
+		
 	}
 
 	class TAdapter extends KeyAdapter
