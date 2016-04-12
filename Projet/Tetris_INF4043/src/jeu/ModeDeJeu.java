@@ -33,9 +33,12 @@ public class ModeDeJeu extends JFrame {
 	static String name;
 	static String scoreAdv;
 	static String[] joueurs = lectureMulti();
+	static boolean multiJ = false;
 
-    public ModeDeJeu(boolean multiJ) {
-
+    public ModeDeJeu(boolean multiJ)
+    {
+    	ModeDeJeu.multiJ = multiJ;
+    	
         statusbar = new JLabel("Score: 0");
         statusbarT = new JLabel("Temps : 0");
         scoreAdversaire = new JLabel("Score : 0");

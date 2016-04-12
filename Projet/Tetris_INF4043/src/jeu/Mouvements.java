@@ -64,7 +64,8 @@ public class Mouvements extends JPanel implements ActionListener
 		temps++;
 		statusBarT.setText("Temps : " + temps);
 		
-		testActionsAdversaire();
+		if(ModeDeJeu.multiJ == true)
+			testActionsAdversaire();
 		
 		if (isFallingFinished)
 		{
@@ -133,14 +134,9 @@ public class Mouvements extends JPanel implements ActionListener
 			timer.stop();
 			isStarted = false;
 			sc.ajoutScore(score);
-			resetMulti();
-			int reply = JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez perdu !</h1><br><b>Voulez-vous recommencer ?</b>", "Game Over", JOptionPane.YES_NO_OPTION);
-	        if (reply == JOptionPane.YES_OPTION) {
-	        	new PageLancement();
-	        }
-	        else {
-	        	
-	        }
+			editerFichier("");
+			JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez perdu !</h1>", "Game Over", JOptionPane.YES_NO_OPTION);
+	        System.exit(0);
 		}
 	}
 	
@@ -217,11 +213,11 @@ public class Mouvements extends JPanel implements ActionListener
 			score = score%300;
 
 			if(score > 99 && score < 200)
-				editerFichier("malus1");
+				editerFichier(PageLancement.getName() + " : " + "malus1");
 			else if (score > 199 && score < 300)
-				editerFichier("malus2");
+				editerFichier(PageLancement.getName() + " : " + "malus2");
 			else if (score < 100)
-				editerFichier("malus3");
+				editerFichier(PageLancement.getName() + " : " + "malus3");
 		}
 	}
 
@@ -234,25 +230,7 @@ public class Mouvements extends JPanel implements ActionListener
 			FileWriter fw = new FileWriter(fichier);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.print(PageLancement.getName() + " : " + malus); 
-			fichierSortie.close();
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-	}
-	
-	private void resetMulti()
-	{
-		String fichier ="multi.txt";
-		
-		try
-		{
-			FileWriter fw = new FileWriter(fichier);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.print(""); 
+			fichierSortie.print(malus); 
 			fichierSortie.close();
 		}
 		catch (Exception e)
@@ -268,39 +246,51 @@ public class Mouvements extends JPanel implements ActionListener
 
 		if(etat.equals(adversaire + " : malus1"))
 		{
+			ModeDeJeu.setMalusAdversaire("Temps accéléré");
 			compteurMalus2 = 0;
 			compteurMalus3 = 0;
 			
 			compteurMalus1++;
 
-			if(compteurMalus1 > 10)
+			if(compteurMalus1 > 20)
 				timer.setDelay(700);
-			else if(compteurMalus1 > 10)
+			else if(compteurMalus1 > 20)
+			{
+				ModeDeJeu.setMalusAdversaire("");
 				timer.setDelay(1000);
+			}
 		}
 		else if(etat.equals(adversaire + " : malus2"))
 		{
+			ModeDeJeu.setMalusAdversaire("Comandes inversées");
 			compteurMalus1 = 0;
 			compteurMalus3 = 0;
 			
 			compteurMalus2++;
             
-			if(compteurMalus2 <= 5)
+			if(compteurMalus2 <= 10)
 				malus2 = true;
-			else if(compteurMalus2 > 5)
+			else if(compteurMalus2 > 10)
+			{
+				ModeDeJeu.setMalusAdversaire("");
 				malus2 = false;
+			}
 		}
 		else if(etat.equals(adversaire + " : malus3"))
 		{
+			ModeDeJeu.setMalusAdversaire("Que des Z");
 			compteurMalus1 = 0;
 			compteurMalus2 = 0;
 			
 			compteurMalus3++;
             
-			if(compteurMalus3 <= 5)
+			if(compteurMalus3 <= 10)
 				malus3 = true;
-			else if(compteurMalus3 > 5)
+			else if(compteurMalus3 > 10)
+			{
+				ModeDeJeu.setMalusAdversaire("");
 				malus3 = false;
+			}
 		}
 	}
 	
@@ -328,18 +318,30 @@ public class Mouvements extends JPanel implements ActionListener
 			System.out.println(e.toString());
 		}
 		
+		testFin(joueurs);
+		
 		return joueurs[0];
+	}
+	
+	private void testFin(String[] j)
+	{
+		if(j[0] == null)
+		{
+			JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez gagné !</h1><br>", "GAGNE", JOptionPane.YES_NO_OPTION);
+        	System.exit(0);
+		}
 	}
 	
 	private String nomAdversaire()
 	{
 		String[] joueursM = ModeDeJeu.getJoueurs();
+		String nomJ = PageLancement.getName();
 		
 		for(int i=0;i<joueursM.length;++i)
 		{
-			if(joueursM[0].equals(PageLancement.getName()))
+			if(joueursM[0].equals(nomJ))
 				return joueursM[1];
-			else if(joueursM[1].equals(PageLancement.getName()))
+			else if(joueursM[1].equals(nomJ))
 				return joueursM[0];
 		}
 		return null;
