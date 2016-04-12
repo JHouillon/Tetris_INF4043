@@ -50,7 +50,7 @@ public class ModeDeJeu extends JFrame {
         add(menu,BorderLayout.WEST);
         add(jeu,BorderLayout.CENTER);
         add(score,BorderLayout.EAST);
-        
+
         if(multiJ == true)
         {
             ajoutMulti();
