@@ -8,6 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -63,6 +70,8 @@ public class Mouvements extends JPanel implements ActionListener
 		{
 			oneLineDown();
 		}
+		
+		testActionsAdversaire();
 	}
 
 	private void pause()
@@ -207,17 +216,114 @@ public class Mouvements extends JPanel implements ActionListener
 	
 	private void malus1()
 	{
+		String fichier ="multi.txt";
 		
+		try
+		{
+			FileWriter fw = new FileWriter(fichier);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter fichierSortie = new PrintWriter(bw);
+			fichierSortie.print(PageLancement.getName() + " : malus1"); 
+			fichierSortie.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 	}
 	
 	private void malus2()
 	{
+		String fichier ="multi.txt";
 		
+		try
+		{
+			FileWriter fw = new FileWriter(fichier);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter fichierSortie = new PrintWriter(bw);
+			fichierSortie.print(PageLancement.getName() + " : malus2"); 
+			fichierSortie.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
 	}
 	
 	private void malus3()
 	{
+		String fichier ="multi.txt";
 		
+		try
+		{
+			FileWriter fw = new FileWriter(fichier);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter fichierSortie = new PrintWriter(bw);
+			fichierSortie.print(PageLancement.getName() + " : malus3"); 
+			fichierSortie.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+	}
+	
+	private void testActionsAdversaire()
+	{
+		String etat = lectureMalus();
+		String adversaire = nomAdversaire();
+
+		if(etat == adversaire + " : malus1")
+		{
+			//malus1
+		}
+		else if(etat == adversaire + " : malus2")
+		{
+			//malus2
+		}
+		else if(etat == adversaire + " : malus3")
+		{
+			//malus3
+		}
+	}
+	
+	public String lectureMalus()
+	{
+		String fichier = "multi.txt";
+		int nbLigne = 0;
+		String[] joueurs = new String[2];
+
+		try{
+			InputStream ips=new FileInputStream(fichier); 
+			InputStreamReader ipsr=new InputStreamReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			String ligne;
+			
+			while ((ligne=br.readLine())!=null)
+			{
+				joueurs[nbLigne] = ligne;
+				nbLigne++;
+			}
+			br.close();
+		}		
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+		
+		return joueurs[0];
+	}
+	
+	private String nomAdversaire()
+	{
+		for(int i=0;i<joueursM.length;)
+		{
+			if(joueursM[0] != PageLancement.getName())
+				return joueursM[0];
+			else
+				return joueursM[1];
+		}
+		return null;
 	}
 
 	class TAdapter extends KeyAdapter
