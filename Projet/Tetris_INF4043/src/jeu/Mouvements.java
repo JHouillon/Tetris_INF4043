@@ -131,6 +131,7 @@ public class Mouvements extends JPanel implements ActionListener
 			timer.stop();
 			isStarted = false;
 			sc.ajoutScore(score);
+			resetMulti();
 			int reply = JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez perdu !</h1><br><b>Voulez-vous recommencer ?</b>", "Game Over", JOptionPane.YES_NO_OPTION);
 	        if (reply == JOptionPane.YES_OPTION) {
 	        	new PageLancement();
@@ -220,7 +221,7 @@ public class Mouvements extends JPanel implements ActionListener
 				editerFichier("malus3");
 		}
 	}
-	
+
 	private void editerFichier(String malus)
 	{
 		String fichier ="multi.txt";
@@ -239,6 +240,24 @@ public class Mouvements extends JPanel implements ActionListener
 		}
 	}
 	
+	private void resetMulti()
+	{
+		String fichier ="multi.txt";
+		
+		try
+		{
+			FileWriter fw = new FileWriter(fichier);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter fichierSortie = new PrintWriter(bw);
+			fichierSortie.print(""); 
+			fichierSortie.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println(e.toString());
+		}
+	}
+	
 	private void testActionsAdversaire()
 	{
 		String etat = lectureMalus();
@@ -248,9 +267,9 @@ public class Mouvements extends JPanel implements ActionListener
 		{
 			compteurMalus++;
 
-			timer.setDelay(800);
+			timer.setDelay(700);
 			
-			if(compteurMalus == 40)
+			if(compteurMalus == 10)
 			{
 				timer.setDelay(1000);
 				compteurMalus = 0;
@@ -262,7 +281,7 @@ public class Mouvements extends JPanel implements ActionListener
             
 			malus2 = true;
 			
-			if(compteurMalus == 20)
+			if(compteurMalus == 5)
 			{
 				malus2 = false;
 				compteurMalus = 0;
@@ -274,7 +293,7 @@ public class Mouvements extends JPanel implements ActionListener
             
 			malus3 = true;
 			
-			if(compteurMalus == 20)
+			if(compteurMalus == 5)
 			{
 				malus3 = false;
 				compteurMalus = 0;
