@@ -29,6 +29,7 @@ public class ModeDeJeu extends JFrame {
 	static JLabel nom;
 	static JLabel nomAdversaire;
 	static JLabel scoreAdversaire;
+	static JLabel malusAdversaire;
 	static String name;
 	static String scoreAdv;
 	static String[] joueurs = lectureMulti();
@@ -38,6 +39,8 @@ public class ModeDeJeu extends JFrame {
         statusbar = new JLabel("Score: 0");
         statusbarT = new JLabel("Temps : 0");
         scoreAdversaire = new JLabel("Score : 0");
+        malusAdversaire = new JLabel("Malus : aucun");
+        malusAdversaire.setBackground(Color.RED);
         Plateau p = new Plateau(this);
         nom = new JLabel(PageLancement.getName());
         this.setLayout(new BorderLayout());
@@ -77,8 +80,9 @@ public class ModeDeJeu extends JFrame {
         		nomAdversaire = new JLabel("tot");
 
         	menuMulti.setVisible(true);
-            menuMulti.add(nomAdversaire);
-            menuMulti.add(scoreAdversaire);
+            menuMulti.add(nomAdversaire,BorderLayout.NORTH);
+            menuMulti.add(malusAdversaire,BorderLayout.CENTER);
+            menuMulti.add(scoreAdversaire,BorderLayout.SOUTH);
             menu.add(menuMulti, BorderLayout.SOUTH);
         }
         else if (multiJ == false)
@@ -111,6 +115,10 @@ public class ModeDeJeu extends JFrame {
     
     public static void setScoreAdversaire(String scoreAdv){
     	scoreAdversaire.setText(scoreAdv);;
+    }
+    
+    public static void setMalusAdversaire(String malusAdv){
+    	malusAdversaire.setText(malusAdv);
     }
     
     public JLabel getStatusBarT() {
