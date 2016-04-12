@@ -21,6 +21,8 @@ public class ModeDeJeu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static JPanel jeu = new JPanel(new BorderLayout());
 	static JPanel menu = new JPanel(new BorderLayout());
+	static JPanel menuSolo = new JPanel(new BorderLayout());
+	static JPanel menuMulti = new JPanel(new BorderLayout());
 	static JPanel score = new JPanel(new BorderLayout());
 	static JLabel statusbar;
 	static JLabel statusbarT;
@@ -37,11 +39,16 @@ public class ModeDeJeu extends JFrame {
         Plateau p = new Plateau(this);
         nom = new JLabel(PageLancement.getName());
         this.setLayout(new BorderLayout());
-
+        
+        menuSolo.setPreferredSize(new Dimension(150,200));
+        menuSolo.setBackground(Color.GRAY);
+        menuMulti.setPreferredSize(new Dimension(150,200));
+        menuMulti.setBackground(Color.GRAY);
+        
         menu.setPreferredSize(new Dimension(150,400));
         jeu.setPreferredSize(new Dimension(200,400));
         score.setPreferredSize(new Dimension(150,400));
-        
+     
         if(multiJ == true)
         {
             ajoutMulti();
@@ -56,25 +63,24 @@ public class ModeDeJeu extends JFrame {
             	}
             }
         	
-        	if(joueurs[0] != PageLancement.getName())
+        	if(joueurs[0] == PageLancement.getName())
         		nomAdversaire = new JLabel("Adversaire : " + joueurs[0]);
-        	else
+        	else if(joueurs[1] == PageLancement.getName())
         		nomAdversaire = new JLabel("Adversaire : " + joueurs[1]);
 
-        	nomAdversaire.setVisible(true);
-        	scoreAdversaire.setVisible(true);
+        	menuMulti.setVisible(true);
+            menuMulti.add(nomAdversaire);
+           // menuMulti.add(scoreAdversaire); // NE fonctionne pas si pas de score
+            menu.add(menuMulti, BorderLayout.SOUTH);
         }
         else if (multiJ == false)
         {
-            nomAdversaire.setVisible(false);
-            scoreAdversaire.setVisible(false);
+            menuMulti.setVisible(false);
         }
         
         jeu.add(p);
-        menu.add(nom);
-        menu.add(nomAdversaire);
-        menu.add(scoreAdversaire);
-        menu.setBackground(Color.GRAY);
+        menuSolo.add(nom);
+        menu.add(menuSolo, BorderLayout.NORTH);
         score.add(statusbar);
         score.add(statusbarT, BorderLayout.SOUTH);
         score.setBackground(Color.GRAY);
