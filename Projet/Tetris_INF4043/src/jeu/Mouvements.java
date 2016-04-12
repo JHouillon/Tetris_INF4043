@@ -135,7 +135,7 @@ public class Mouvements extends JPanel implements ActionListener
 			isStarted = false;
 			sc.ajoutScore(score);
 			editerFichier("");
-			JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez perdu !</h1>", "Game Over", JOptionPane.YES_NO_OPTION);
+			JOptionPane.showMessageDialog(null, "<html><h1>Vous avez perdu !</h1><br>");
 	        System.exit(0);
 		}
 	}
@@ -187,7 +187,6 @@ public class Mouvements extends JPanel implements ActionListener
 			{
 				score = sc.ligneRemplie(temps);
 				statusBar.setText("Score : " + score);
-				ModeDeJeu.setScoreAdversaire("Score : " + score);
 				testScoreMalus(score);
 				++numFullLines;
 				for (int k = i; k < BoardHeight - 1; ++k)
@@ -327,7 +326,7 @@ public class Mouvements extends JPanel implements ActionListener
 	{
 		if(j[0] == null)
 		{
-			JOptionPane.showConfirmDialog(null, "<html><h1>Vous avez gagné !</h1><br>", "GAGNE", JOptionPane.YES_NO_OPTION);
+			JOptionPane.showMessageDialog(null, "<html><h1>Vous avez gagné !</h1><br>");
         	System.exit(0);
 		}
 	}

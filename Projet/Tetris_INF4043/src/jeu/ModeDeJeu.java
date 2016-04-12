@@ -28,10 +28,8 @@ public class ModeDeJeu extends JFrame {
 	static JLabel statusbarT;
 	static JLabel nom;
 	static JLabel nomAdversaire;
-	static JLabel scoreAdversaire;
 	static JLabel malusAdversaire;
 	static String name;
-	static String scoreAdv;
 	static String[] joueurs = lectureMulti();
 	static boolean multiJ = false;
 
@@ -41,17 +39,11 @@ public class ModeDeJeu extends JFrame {
     	
         statusbar = new JLabel("Score: 0");
         statusbarT = new JLabel("Temps : 0");
-        scoreAdversaire = new JLabel("Score : 0");
         malusAdversaire = new JLabel("Malus : aucun");
         malusAdversaire.setBackground(Color.RED);
         Plateau p = new Plateau(this);
         nom = new JLabel(PageLancement.getName());
         this.setLayout(new BorderLayout());
-        
-        menuSolo.setPreferredSize(new Dimension(150,200));
-        menuSolo.setBackground(Color.GRAY);
-        menuMulti.setPreferredSize(new Dimension(150,200));
-        menuMulti.setBackground(Color.GRAY);
         
         menu.setPreferredSize(new Dimension(150,400));
         jeu.setPreferredSize(new Dimension(200,400));
@@ -81,15 +73,23 @@ public class ModeDeJeu extends JFrame {
         		nomAdversaire = new JLabel("Adversaire : " + joueurs[0]);
         	else
         		nomAdversaire = new JLabel("tot");
+        	
+
+            
+            menuSolo.setPreferredSize(new Dimension(150,200));
+            menuSolo.setBackground(Color.GRAY);
+            menuMulti.setPreferredSize(new Dimension(150,200));
+            menuMulti.setBackground(Color.GRAY);
 
         	menuMulti.setVisible(true);
             menuMulti.add(nomAdversaire,BorderLayout.NORTH);
             menuMulti.add(malusAdversaire,BorderLayout.CENTER);
-            menuMulti.add(scoreAdversaire,BorderLayout.SOUTH);
             menu.add(menuMulti, BorderLayout.SOUTH);
         }
         else if (multiJ == false)
-        {
+        {           
+            menuSolo.setPreferredSize(new Dimension(150,450));
+            menuSolo.setBackground(Color.GRAY);
             menuMulti.setVisible(false);
         }
         
@@ -114,10 +114,6 @@ public class ModeDeJeu extends JFrame {
 
     public JLabel getStatusBar() {
         return statusbar;
-    }
-    
-    public static void setScoreAdversaire(String scoreAdv){
-    	scoreAdversaire.setText(scoreAdv);;
     }
     
     public static void setMalusAdversaire(String malusAdv){
