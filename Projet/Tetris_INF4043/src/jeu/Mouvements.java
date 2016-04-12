@@ -43,7 +43,9 @@ public class Mouvements extends JPanel implements ActionListener
 	int temps=0;
 	boolean malus2 = false;
 	boolean malus3 = false;
-	int compteurMalus = 0;
+	int compteurMalus1 = 0;
+	int compteurMalus2 = 0;
+	int compteurMalus3 = 0;
 	
 	public Mouvements()
 	{
@@ -266,39 +268,39 @@ public class Mouvements extends JPanel implements ActionListener
 
 		if(etat.equals(adversaire + " : malus1"))
 		{
-			compteurMalus++;
-
-			timer.setDelay(700);
+			compteurMalus2 = 0;
+			compteurMalus3 = 0;
 			
-			if(compteurMalus == 10)
-			{
+			compteurMalus1++;
+
+			if(compteurMalus1 > 10)
+				timer.setDelay(700);
+			else if(compteurMalus1 > 10)
 				timer.setDelay(1000);
-				compteurMalus = 0;
-			}
 		}
 		else if(etat.equals(adversaire + " : malus2"))
 		{
-			compteurMalus++;
-            
-			malus2 = true;
+			compteurMalus1 = 0;
+			compteurMalus3 = 0;
 			
-			if(compteurMalus == 5)
-			{
+			compteurMalus2++;
+            
+			if(compteurMalus2 <= 5)
+				malus2 = true;
+			else if(compteurMalus2 > 5)
 				malus2 = false;
-				compteurMalus = 0;
-			}
 		}
 		else if(etat.equals(adversaire + " : malus3"))
 		{
-			compteurMalus++;
-            
-			malus3 = true;
+			compteurMalus1 = 0;
+			compteurMalus2 = 0;
 			
-			if(compteurMalus == 5)
-			{
+			compteurMalus3++;
+            
+			if(compteurMalus3 <= 5)
+				malus3 = true;
+			else if(compteurMalus3 > 5)
 				malus3 = false;
-				compteurMalus = 0;
-			}
 		}
 	}
 	
