@@ -51,11 +51,11 @@ public class ModeDeJeu extends JFrame {
         add(jeu,BorderLayout.CENTER);
         add(score,BorderLayout.EAST);
         
-        ajoutMulti();
-        JOptionPane.showConfirmDialog(null, "En attente d'un autre joueur...", "Veuillez patienter", JOptionPane.CANCEL_OPTION);
-
         if(multiJ == true)
         {
+            ajoutMulti();
+            JOptionPane.showConfirmDialog(null, "En attente d'un autre joueur...", "Veuillez patienter", JOptionPane.CANCEL_OPTION);
+
         	while(joueurs[1] == null)
             {
             	joueurs = lectureMulti();
