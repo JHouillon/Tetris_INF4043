@@ -25,15 +25,22 @@ public class ModeDeJeu extends JFrame {
 	static JLabel statusbar;
 	static JLabel statusbarT;
 	static JLabel nom;
+	static JLabel adversaire;	
+	static String Nomadversaire;
+	static int Scoreadversaire;
 	static String name;
 	static String[] joueurs = lectureMulti();
 
     public ModeDeJeu(boolean multiJ) {
 
+    	Nomadversaire = PageLancement.getName(); //A modifier avec lecture du fichier txt des noms
+    	Scoreadversaire = 0; //A modifier dans Mouvements avec les scores en temps réel des joueurs
         statusbar = new JLabel("Score: 0");
         statusbarT = new JLabel("Temps : 0");
         Plateau p = new Plateau(this);
         nom = new JLabel(PageLancement.getName());
+        adversaire = new JLabel("Adversaire : "+Nomadversaire+"\nScore : "+Scoreadversaire);
+        adversaire.setVisible(false); //Si le jeu est en solo (par défaut), cela ne s'affiche pas
         this.setLayout(new BorderLayout());
 
         menu.setPreferredSize(new Dimension(150,400));
@@ -42,6 +49,7 @@ public class ModeDeJeu extends JFrame {
         
         jeu.add(p);
         menu.add(nom);
+        menu.add(adversaire);
         menu.setBackground(Color.GRAY);
         score.add(statusbar);
         score.add(statusbarT, BorderLayout.SOUTH);
@@ -63,6 +71,7 @@ public class ModeDeJeu extends JFrame {
             	{
             		System.out.println(joueurs[i]);
             	}
+            	adversaire.setVisible(true); //multi en marche alors on affiche l'adversaire
             }
         }
         
