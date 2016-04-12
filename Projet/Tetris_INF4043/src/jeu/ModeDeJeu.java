@@ -37,6 +37,7 @@ public class ModeDeJeu extends JFrame {
 
         statusbar = new JLabel("Score: 0");
         statusbarT = new JLabel("Temps : 0");
+        scoreAdversaire = new JLabel("Score : 0");
         Plateau p = new Plateau(this);
         nom = new JLabel(PageLancement.getName());
         this.setLayout(new BorderLayout());
@@ -77,7 +78,7 @@ public class ModeDeJeu extends JFrame {
 
         	menuMulti.setVisible(true);
             menuMulti.add(nomAdversaire);
-            menuMulti.add(scoreAdversaire); // NE fonctionne pas si pas de score
+            menuMulti.add(scoreAdversaire);
             menu.add(menuMulti, BorderLayout.SOUTH);
         }
         else if (multiJ == false)
@@ -108,8 +109,8 @@ public class ModeDeJeu extends JFrame {
         return statusbar;
     }
     
-    public JLabel getScoreAdversaire(){
-    	return scoreAdversaire;
+    public static void setScoreAdversaire(String scoreAdv){
+    	scoreAdversaire.setText(scoreAdv);;
     }
     
     public JLabel getStatusBarT() {

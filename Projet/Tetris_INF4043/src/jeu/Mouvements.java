@@ -189,6 +189,7 @@ public class Mouvements extends JPanel implements ActionListener
 			{
 				score = sc.ligneRemplie(temps);
 				statusBar.setText("Score : " + score);
+				ModeDeJeu.setScoreAdversaire("Score : " + score);
 				testScoreMalus(score);
 				++numFullLines;
 				for (int k = i; k < BoardHeight - 1; ++k)
@@ -332,14 +333,14 @@ public class Mouvements extends JPanel implements ActionListener
 	{
 		String[] joueursM = ModeDeJeu.getJoueurs();
 		
-		for(int i=0;i<joueursM.length;)
+		for(int i=0;i<joueursM.length;++i)
 		{
 			if(joueursM[0].equals(PageLancement.getName()))
 				return joueursM[1];
 			else if(joueursM[1].equals(PageLancement.getName()))
 				return joueursM[0];
 		}
-		return "Toto";
+		return null;
 	}
 
 	class TAdapter extends KeyAdapter
