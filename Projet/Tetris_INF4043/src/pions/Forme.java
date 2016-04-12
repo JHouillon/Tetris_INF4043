@@ -44,4 +44,10 @@ public class Forme
 		Formes[] values = Formes.values();
 		setForme(values[x]);
 	}
+	
+	public void setZForme()
+	{
+		Formes[] values = Formes.values();
+		setForme(values[1]);
+	}
 }

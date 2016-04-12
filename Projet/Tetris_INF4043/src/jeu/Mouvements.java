@@ -16,7 +16,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,6 +42,9 @@ public class Mouvements extends JPanel implements ActionListener
 	JLabel statusBarT;
 	int temps=0;
 	String[] joueursM = ModeDeJeu.getJoueurs();
+	boolean malus2 = false;
+	boolean malus3 = false;
+	int compteurMalus = 0;
 	
 	public Mouvements()
 	{
@@ -118,7 +120,10 @@ public class Mouvements extends JPanel implements ActionListener
 
 	public void newPiece()
 	{
-		curPiece.setRandomForme();
+		if(malus3 == false)
+			curPiece.setRandomForme();
+		else if(malus3 == true)
+			curPiece.setZForme();
 
 		curX = BoardWidth / 2 + 1;
 		curY = BoardHeight - 1 + curPiece.minY();
@@ -207,14 +212,14 @@ public class Mouvements extends JPanel implements ActionListener
 		score = score%300;
 
 		if(score > 99 && score < 200)
-			malus1();
+			editerFichier("malus1");
 		else if (score > 199 && score < 300)
-			malus2();
+			editerFichier("malus2");
 		else if (score < 100)
-			malus3();
+			editerFichier("malus3");
 	}
 	
-	private void malus1()
+	private void editerFichier(String malus)
 	{
 		String fichier ="multi.txt";
 		
@@ -223,43 +228,7 @@ public class Mouvements extends JPanel implements ActionListener
 			FileWriter fw = new FileWriter(fichier);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.print(PageLancement.getName() + " : malus1"); 
-			fichierSortie.close();
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-	}
-	
-	private void malus2()
-	{
-		String fichier ="multi.txt";
-		
-		try
-		{
-			FileWriter fw = new FileWriter(fichier);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.print(PageLancement.getName() + " : malus2"); 
-			fichierSortie.close();
-		}
-		catch (Exception e)
-		{
-			System.out.println(e.toString());
-		}
-	}
-	
-	private void malus3()
-	{
-		String fichier ="multi.txt";
-		
-		try
-		{
-			FileWriter fw = new FileWriter(fichier);
-			BufferedWriter bw = new BufferedWriter(fw);
-			PrintWriter fichierSortie = new PrintWriter(bw);
-			fichierSortie.print(PageLancement.getName() + " : malus3"); 
+			fichierSortie.print(PageLancement.getName() + " : " + malus); 
 			fichierSortie.close();
 		}
 		catch (Exception e)
@@ -275,15 +244,50 @@ public class Mouvements extends JPanel implements ActionListener
 
 		if(etat == adversaire + " : malus1")
 		{
-			//malus1
+			compteurMalus++;
+			
+            JOptionPane.showConfirmDialog(null, "Malus activé par votre adversaire : Vitesse de jeu accèlérée (x2)",
+            		"Malus", JOptionPane.CANCEL_OPTION);
+
+			timer = new Timer(500, this);
+			timer.start();
+			
+			if(compteurMalus == 40)
+			{
+				timer = new Timer(1000, this);
+				timer.start();
+				compteurMalus = 0;
+			}
 		}
 		else if(etat == adversaire + " : malus2")
 		{
-			//malus2
+			compteurMalus++;
+			
+            JOptionPane.showConfirmDialog(null, "Malus activé par votre adversaire : Touches droite et gauche inversées",
+            		"Malus", JOptionPane.CANCEL_OPTION);
+            
+			malus2 = true;
+			
+			if(compteurMalus == 20)
+			{
+				malus2 = false;
+				compteurMalus = 0;
+			}
 		}
 		else if(etat == adversaire + " : malus3")
 		{
-			//malus3
+			compteurMalus++;
+			
+            JOptionPane.showConfirmDialog(null, "Malus activé par votre adversaire : Seulement la forme Z",
+            		"Malus", JOptionPane.CANCEL_OPTION);
+            
+			malus3 = true;
+			
+			if(compteurMalus == 20)
+			{
+				malus3 = false;
+				compteurMalus = 0;
+			}
 		}
 	}
 	
@@ -345,10 +349,16 @@ public class Mouvements extends JPanel implements ActionListener
 			switch (keycode)
 			{
 			case KeyEvent.VK_LEFT:
-				tryMove(curPiece, curX - 1, curY);
+				if(malus2 == true)
+					tryMove(curPiece, curX + 1, curY);
+				else if (malus2 == false)
+					tryMove(curPiece, curX - 1, curY);
 				break;
 			case KeyEvent.VK_RIGHT:
-				tryMove(curPiece, curX + 1, curY);
+				if(malus2 == true)
+					tryMove(curPiece, curX - 1, curY);
+				else if (malus2 == false)
+					tryMove(curPiece, curX + 1, curY);
 				break;
 			case KeyEvent.VK_DOWN:
 				tryMove(curPiece.rotateRight(), curX, curY);
