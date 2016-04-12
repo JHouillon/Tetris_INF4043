@@ -30,6 +30,7 @@ public class ModeDeJeu extends JFrame {
 	static JLabel nomAdversaire;
 	static JLabel scoreAdversaire;
 	static String name;
+	static String scoreAdv;
 	static String[] joueurs = lectureMulti();
 
     public ModeDeJeu(boolean multiJ) {
@@ -76,7 +77,7 @@ public class ModeDeJeu extends JFrame {
 
         	menuMulti.setVisible(true);
             menuMulti.add(nomAdversaire);
-           // menuMulti.add(scoreAdversaire); // NE fonctionne pas si pas de score
+            menuMulti.add(scoreAdversaire); // NE fonctionne pas si pas de score
             menu.add(menuMulti, BorderLayout.SOUTH);
         }
         else if (multiJ == false)
@@ -105,6 +106,10 @@ public class ModeDeJeu extends JFrame {
 
     public JLabel getStatusBar() {
         return statusbar;
+    }
+    
+    public JLabel getScoreAdversaire(){
+    	return scoreAdversaire;
     }
     
     public JLabel getStatusBarT() {
