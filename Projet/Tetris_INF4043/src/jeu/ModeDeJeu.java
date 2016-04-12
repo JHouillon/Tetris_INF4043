@@ -2,7 +2,6 @@ package jeu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -14,6 +13,7 @@ import java.io.PrintWriter;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ModeDeJeu extends JFrame {
@@ -26,7 +26,7 @@ public class ModeDeJeu extends JFrame {
 	static JLabel statusbarT;
 	static JLabel nom;
 	static String name;
-	String[] joueurs = lectureMulti();
+	static String[] joueurs = lectureMulti();
 
     public ModeDeJeu(boolean multiJ) {
 
@@ -52,7 +52,8 @@ public class ModeDeJeu extends JFrame {
         add(score,BorderLayout.EAST);
         
         ajoutMulti();
-        
+        JOptionPane.showConfirmDialog(null, "En attente d'un autre joueur...", "Veuillez patienter", JOptionPane.CANCEL_OPTION);
+
         if(multiJ == true)
         {
         	while(joueurs[1] == null)
@@ -81,7 +82,12 @@ public class ModeDeJeu extends JFrame {
         return statusbarT;
     }
     
-	public String[] lectureMulti()
+    public static String[] getJoueurs()
+    {
+    	return joueurs;
+    }
+    
+	public static String[] lectureMulti()
 	{
 		String fichier = "multi.txt";
 		int nbLigne = 0;
@@ -129,16 +135,5 @@ public class ModeDeJeu extends JFrame {
 			System.out.println(e.toString());
 		}
 	}
-    
-    public void ResetFrame (){
-    	Container cp = ModeDeJeu.this.getContentPane();
-    	System.out.println(jeu);
-    	jeu.removeAll();
-    	System.out.println(jeu);
-    	JLabel label = new JLabel("bonsoir tous le monde");
-    	jeu.add(label /*, contrainte éventuelle liée au layout */);
-    	jeu.repaint();
-
-    }
 }
 
