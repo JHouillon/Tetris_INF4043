@@ -54,6 +54,8 @@ public class ModeDeJeu extends JFrame {
             ajoutMulti();
             JOptionPane.showConfirmDialog(null, "En attente d'un autre joueur...", "Veuillez patienter", JOptionPane.CANCEL_OPTION);
 
+        	joueurs = lectureMulti();
+        	
         	while(joueurs[1] == null)
             {
             	joueurs = lectureMulti();
@@ -63,10 +65,14 @@ public class ModeDeJeu extends JFrame {
             	}
             }
         	
-        	if(joueurs[0] == PageLancement.getName())
-        		nomAdversaire = new JLabel("Adversaire : " + joueurs[0]);
-        	else if(joueurs[1] == PageLancement.getName())
+        	String nomJ = PageLancement.getName();
+        	
+        	if(joueurs[0].equals(nomJ))
         		nomAdversaire = new JLabel("Adversaire : " + joueurs[1]);
+        	else if(joueurs[1].equals(nomJ))
+        		nomAdversaire = new JLabel("Adversaire : " + joueurs[0]);
+        	else
+        		nomAdversaire = new JLabel("tot");
 
         	menuMulti.setVisible(true);
             menuMulti.add(nomAdversaire);
