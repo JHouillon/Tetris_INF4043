@@ -25,7 +25,7 @@ public class Score extends Joueur
 	
 	public int ligneRemplie(int temps)
 	{
-		this.valeur += temps;
+		this.valeur += temps/10;
 		return valeur;
 	}
 	
